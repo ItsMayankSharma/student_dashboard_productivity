@@ -895,9 +895,9 @@ export default function Dashboard({
                                 {t.category}
                               </span>
                               <span className={`text-xxs font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide ${
-                                t.priority === 'High' ? 'bg-rose-100 text-rose-600 dark:bg-rose-950/40 dark:text-rose-455' :
-                                t.priority === 'Medium' ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-455' :
-                                'bg-sky-100 text-sky-600 dark:bg-sky-950/40 dark:text-sky-455'
+                                t.priority === 'High' ? 'bg-rose-100 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400' :
+                                t.priority === 'Medium' ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400' :
+                                'bg-sky-100 text-sky-600 dark:bg-sky-950/50 dark:text-sky-400'
                               }`}>
                                 {t.priority}
                               </span>
@@ -1165,9 +1165,9 @@ export default function Dashboard({
                           {t.category}
                         </span>
                         <span className={`text-xxs font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wide ${
-                          t.priority === 'High' ? 'bg-rose-100 text-rose-600 dark:bg-rose-950/40 dark:text-rose-450' :
-                          t.priority === 'Medium' ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-455' :
-                          'bg-sky-100 text-sky-600 dark:bg-sky-950/40 dark:text-sky-455'
+                          t.priority === 'High' ? 'bg-rose-100 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400' :
+                          t.priority === 'Medium' ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400' :
+                          'bg-sky-100 text-sky-600 dark:bg-sky-950/50 dark:text-sky-400'
                         }`}>
                           Priority: {t.priority}
                         </span>
