@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+  
+  --color-accent-indigo: #6366f1;
+  --color-accent-violet: #8b5cf6;
+  --color-accent-pink: #ec4899;
+}
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #090d16;
+    color: #f1f5f9;
+    @apply antialiased min-h-screen;
+  }
+}
+
+/* Stunning Glassmorphic Cards (Permanently Deep Space Dark Style) */
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Pulsing focus animation with HSL shadow colors */
+@keyframes timer-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0px rgba(99, 102, 241, 0.15);
+  }
+  50% {
+    transform: scale(1.01);
+    box-shadow: 0 0 25px 8px rgba(99, 102, 241, 0.1);
+  }
+}
+
+.timer-active {
+  animation: timer-pulse 2s infinite ease-in-out;
+}
+
+/* Custom Scrollbar configuration */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
