@@ -3,7 +3,7 @@ import {
   CheckSquare, Plus, Trash2, Clock, Play, Pause, RotateCcw,
   BookOpen, CloudSun, Award, CheckCircle, Save,
   Flame, TrendingUp, Sparkles, Volume2, VolumeX, ListTodo, RefreshCw,
-  PlusCircle, MinusCircle, Compass, X, Delete
+  PlusCircle, MinusCircle, Compass, X, Delete, Music
 } from 'lucide-react'
 import { Line } from 'react-chartjs-2'
 import {
@@ -17,6 +17,11 @@ import {
   Legend,
   Filler
 } from 'chart.js'
+import Habits from './Habits'
+import Flashcards from './Flashcards'
+import Grades from './Grades'
+import AICoach from './AICoach'
+import ambientSynth from '../utils/synthAudio'
 
 ChartJS.register(
   CategoryScale,
@@ -38,12 +43,54 @@ export default function Dashboard({
   setStudyHours,
   focusScore,
   setFocusScore,
-  activeTab
+  activeTab,
+  xp,
+  setXp,
+  level,
+  setLevel,
+  awardXp
 }) {
   const isDark = document.documentElement.classList.contains('dark')
 
   // Sound effects enabled
   const [soundEnabled, setSoundEnabled] = useState(true)
+
+  // Soundscapes state
+  const [activeSoundTracks, setActiveSoundTracks] = useState({
+    rain: false,
+    binaural: false,
+    fireplace: false,
+    drone: false
+  })
+  const [soundVolumes, setSoundVolumes] = useState({
+    rain: 0.5,
+    binaural: 0.5,
+    fireplace: 0.5,
+    drone: 0.4
+  })
+
+  // Cleanup active soundscapes when leaving
+  useEffect(() => {
+    return () => {
+      ambientSynth.stopAll()
+    }
+  }, [])
+
+  const handleToggleSoundTrack = (trackId) => {
+    const isPlaying = ambientSynth.toggleTrack(trackId)
+    setActiveSoundTracks(prev => ({
+      ...prev,
+      [trackId]: isPlaying
+    }))
+  }
+
+  const handleVolumeChange = (trackId, value) => {
+    ambientSynth.setVolume(trackId, value)
+    setSoundVolumes(prev => ({
+      ...prev,
+      [trackId]: parseFloat(value)
+    }))
+  }
 
   // 1. Pomodoro Timer States (Flexible & Custom Durations!)
   const [customDurations, setCustomDurations] = useState(() => {
@@ -190,6 +237,7 @@ export default function Dashboard({
             if (timerMode === 'work') {
               setStudyHours((h) => parseFloat((h + 0.4).toFixed(1)))
               setFocusScore((s) => Math.min(100, s + 3))
+              awardXp(50) // award 50 XP
               alert('🎉 Focus session completed! Great job. Time for a break!')
             } else {
               alert('⏰ Break finished! Ready to focus?')
@@ -435,7 +483,16 @@ export default function Dashboard({
 
   // Goal logic
   const handleToggleGoal = (id) => {
-    setGoals(goals.map(g => g.id === id ? { ...g, completed: !g.completed } : g))
+    setGoals(goals.map(g => {
+      if (g.id === id) {
+        const nextState = !g.completed
+        if (nextState) {
+          awardXp(10)
+        }
+        return { ...g, completed: nextState }
+      }
+      return g
+    }))
   }
 
   const completedGoalsCount = goals.filter(g => g.completed).length
@@ -471,6 +528,7 @@ export default function Dashboard({
         const nextState = !t.completed
         if (nextState) {
           setFocusScore(prev => Math.min(100, prev + 2))
+          awardXp(20)
         }
         return { ...t, completed: nextState }
       }
@@ -1505,6 +1563,59 @@ export default function Dashboard({
               </div>
             </div>
 
+            {/* Soundscapes Ambient Mixer Panel */}
+            <div className="glass p-5 rounded-3xl border border-white/5 space-y-4 max-w-sm mx-auto text-left">
+              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2 text-center flex items-center justify-center gap-1.5">
+                <Music className="h-4 w-4 text-indigo-400" />
+                <span>Ambient Focus Mixer</span>
+              </h5>
+              
+              <div className="space-y-3">
+                {[
+                  { id: 'rain', label: '🌧️ Heavy Rain' },
+                  { id: 'binaural', label: '🧠 Binaural Beats' },
+                  { id: 'fireplace', label: '🔥 Cozy Fireplace' },
+                  { id: 'drone', label: '🛸 Cosmic Drone' }
+                ].map(track => {
+                  const isActive = activeSoundTracks[track.id]
+                  return (
+                    <div key={track.id} className="flex flex-col gap-1.5 p-2 rounded-xl bg-slate-900/50 border border-slate-950">
+                      <div className="flex items-center justify-between text-[11px] font-bold">
+                        <span className="text-slate-350">{track.label}</span>
+                        <button
+                          onClick={() => handleToggleSoundTrack(track.id)}
+                          className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider border transition-all cursor-pointer ${
+                            isActive 
+                              ? 'bg-indigo-650 text-white border-indigo-500 shadow-sm' 
+                              : 'bg-slate-800 hover:bg-slate-750 text-slate-405 border-white/5'
+                          }`}
+                        >
+                          {isActive ? 'ON' : 'OFF'}
+                        </button>
+                      </div>
+                      {isActive && (
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-[9px] text-slate-500 font-bold">Vol</span>
+                          <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                            value={soundVolumes[track.id]}
+                            onChange={(e) => handleVolumeChange(track.id, e.target.value)}
+                            className="flex-1 h-1 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                          />
+                          <span className="text-[9px] text-indigo-455 font-extrabold min-w-[24px] text-right">
+                            {Math.round(soundVolumes[track.id] * 100)}%
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
             {/* controls */}
             <div className="flex items-center justify-center space-x-4">
               <button
@@ -1529,6 +1640,26 @@ export default function Dashboard({
             </div>
           </div>
         </div>
+      )}
+
+      {/* -------------------- NEW VIEW 5: GAMIFIED HABIT WORKSPACE -------------------- */}
+      {activeTab === 'habits' && (
+        <Habits awardXp={awardXp} setFocusScore={setFocusScore} />
+      )}
+
+      {/* -------------------- NEW VIEW 6: ACTIVE RECALL FLASHCARDS -------------------- */}
+      {activeTab === 'flashcards' && (
+        <Flashcards awardXp={awardXp} />
+      )}
+
+      {/* -------------------- NEW VIEW 7: GRADE BOOK & GPA TRACKER -------------------- */}
+      {activeTab === 'grades' && (
+        <Grades awardXp={awardXp} />
+      )}
+
+      {/* -------------------- NEW VIEW 8: INTELLECTUAL AI STUDY COACH -------------------- */}
+      {activeTab === 'aicoach' && (
+        <AICoach awardXp={awardXp} />
       )}
     </div>
   )

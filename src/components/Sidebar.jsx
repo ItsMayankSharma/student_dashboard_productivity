@@ -1,12 +1,16 @@
 import React from 'react'
-import { Home, CheckSquare, FileText, Clock, Sparkles } from 'lucide-react'
+import { Home, CheckSquare, FileText, Clock, Sparkles, Flame, Brain, BarChart3, MessageSquareText } from 'lucide-react'
 
 export default function Sidebar({ activeTab, setActiveTab, taskCount }) {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare, badge: taskCount > 0 ? taskCount : null },
-    { id: 'notes', label: 'Notes', icon: FileText },
-    { id: 'timer', label: 'Timer', icon: Clock }
+    { id: 'habits', label: 'Habits & XP', icon: Flame },
+    { id: 'timer', label: 'Timer & Sounds', icon: Clock },
+    { id: 'flashcards', label: 'Flashcards', icon: Brain },
+    { id: 'grades', label: 'Grade Book', icon: BarChart3 },
+    { id: 'aicoach', label: 'AI Coach', icon: MessageSquareText },
+    { id: 'notes', label: 'Notes', icon: FileText }
   ]
 
   return (

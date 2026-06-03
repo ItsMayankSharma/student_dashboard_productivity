@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
-import { Edit2, Check, Sparkles, GraduationCap, LogOut } from 'lucide-react'
+import { Edit2, Check, Sparkles, GraduationCap, LogOut, Trophy } from 'lucide-react'
 
 // Default tasks if local storage is blank
 const defaultTasks = [
@@ -48,10 +48,88 @@ function App() {
     return saved ? parseInt(saved) : 82
   })
 
+  const [xp, setXp] = useState(() => {
+    const saved = localStorage.getItem('studydash_xp')
+    return saved ? parseInt(saved) : 0
+  })
+
+  const [level, setLevel] = useState(() => {
+    const saved = localStorage.getItem('studydash_level')
+    return saved ? parseInt(saved) : 1
+  })
+
   // Force system-wide deep dark mode class on document load
   useEffect(() => {
     document.documentElement.classList.add('dark')
   }, [])
+
+  // Sync persistent states to local storage
+  useEffect(() => {
+    localStorage.setItem('studydash_xp', xp.toString())
+  }, [xp])
+
+  useEffect(() => {
+    localStorage.setItem('studydash_level', level.toString())
+  }, [level])
+
+  const awardXp = (amount) => {
+    setXp((prevXp) => {
+      let newXp = prevXp + amount
+      let currentLevel = level
+      let xpNeeded = currentLevel * 100
+      let leveledUp = false
+
+      while (newXp >= xpNeeded) {
+        newXp -= xpNeeded
+        currentLevel += 1
+        xpNeeded = currentLevel * 100
+        leveledUp = true
+      }
+
+      if (leveledUp) {
+        setLevel(currentLevel)
+        // Play level up sound using Web Audio API synthesis
+        try {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+          const osc1 = audioCtx.createOscillator()
+          const osc2 = audioCtx.createOscillator()
+          const gainNode = audioCtx.createGain()
+          
+          osc1.connect(gainNode)
+          osc2.connect(gainNode)
+          gainNode.connect(audioCtx.destination)
+          
+          osc1.type = 'triangle'
+          osc2.type = 'sine'
+          
+          const now = audioCtx.currentTime
+          osc1.frequency.setValueAtTime(523.25, now) // C5
+          osc1.frequency.setValueAtTime(659.25, now + 0.1) // E5
+          osc1.frequency.setValueAtTime(783.99, now + 0.2) // G5
+          osc1.frequency.setValueAtTime(1046.50, now + 0.3) // C6
+          
+          osc2.frequency.setValueAtTime(261.63, now) // C4
+          osc2.frequency.setValueAtTime(329.63, now + 0.1) // E4
+          osc2.frequency.setValueAtTime(392.00, now + 0.2) // G4
+          osc2.frequency.setValueAtTime(523.25, now + 0.3) // C5
+          
+          gainNode.gain.setValueAtTime(0, now)
+          gainNode.gain.linearRampToValueAtTime(0.2, now + 0.05)
+          gainNode.gain.setValueAtTime(0.2, now + 0.4)
+          gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.7)
+          
+          osc1.start(now)
+          osc2.start(now)
+          osc1.stop(now + 0.7)
+          osc2.stop(now + 0.7)
+        } catch (e) {
+          console.warn('Level up sound failed', e)
+        }
+      }
+
+      return newXp
+    })
+  }
 
   // Sync persistent states to local storage
   useEffect(() => {
@@ -171,6 +249,25 @@ function App() {
               </div>
             </div>
 
+            {/* Level & XP Widget */}
+            <div className="flex items-center space-x-3 bg-slate-900/50 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800 px-4 py-2.5 rounded-2xl">
+              <div className="bg-amber-500/10 text-amber-500 p-2 rounded-xl animate-pulse">
+                <Trophy className="h-5 w-5" />
+              </div>
+              <div className="min-w-[120px] sm:min-w-[140px]">
+                <div className="flex items-center justify-between text-[11px] font-black text-slate-350 dark:text-slate-300 mb-1">
+                  <span>LVL {level}</span>
+                  <span className="text-indigo-400 font-extrabold">{xp} / {level * 100} XP</span>
+                </div>
+                <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-amber-400 via-indigo-500 to-violet-500 transition-all duration-500"
+                    style={{ width: `${(xp / (level * 100)) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Config controls */}
             <div className="flex items-center space-x-3 self-end sm:self-auto">
               <button
@@ -194,6 +291,11 @@ function App() {
             focusScore={focusScore}
             setFocusScore={setFocusScore}
             activeTab={activeTab}
+            xp={xp}
+            setXp={setXp}
+            level={level}
+            setLevel={setLevel}
+            awardXp={awardXp}
           />
         </main>
       </div>
