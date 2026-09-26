@@ -162,8 +162,8 @@ export default function Flashcards({ awardXp }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <div className="flex items-center space-x-2">
-            <Brain className="h-6 w-6 text-indigo-400" />
-            <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+            <Brain className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+            <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">
               Active Recall Flashcards
             </h2>
           </div>
@@ -175,7 +175,7 @@ export default function Flashcards({ awardXp }) {
         {activeDeckId && (
           <button
             onClick={() => { setActiveDeckId(null); setIsStudyMode(false); }}
-            className="self-start sm:self-auto bg-slate-850 hover:bg-slate-800 border border-slate-800 text-slate-350 hover:text-white px-4 py-2 rounded-2xl text-xs font-bold transition-all active:scale-[0.98]"
+            className="self-start sm:self-auto bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 hover:text-slate-900 dark:bg-slate-850 dark:hover:bg-slate-800 dark:border-slate-800 dark:text-slate-350 dark:hover:text-white px-4 py-2 rounded-2xl text-xs font-bold transition-all active:scale-[0.98] cursor-pointer shadow-xs"
           >
             ← Back to Decks
           </button>
@@ -187,14 +187,14 @@ export default function Flashcards({ awardXp }) {
         <div className="max-w-xl mx-auto space-y-6">
           
           {/* Progress Header */}
-          <div className="flex items-center justify-between text-xs font-bold text-slate-400">
-            <span>Deck: <strong className="text-slate-200">{activeDeck.name}</strong></span>
+          <div className="flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-400">
+            <span>Deck: <strong className="text-slate-800 dark:text-slate-200">{activeDeck.name}</strong></span>
             <span>{sessionCards.length} Cards Remaining (Mastered {masteredCount}/{activeDeck.cards.length})</span>
           </div>
 
-          <div className="w-full bg-slate-850 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-slate-200 dark:bg-slate-850 h-2 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-indigo-500 transition-all duration-300"
+              className="h-full bg-indigo-600 dark:bg-indigo-500 transition-all duration-300"
               style={{ width: `${(masteredCount / activeDeck.cards.length) * 100}%` }}
             />
           </div>
@@ -202,7 +202,7 @@ export default function Flashcards({ awardXp }) {
           {/* Interactive 3D Flip Card */}
           {sessionCards.length > 0 && (
             <div 
-              className="w-full h-72 [perspective:1000px] cursor-pointer group"
+              className="w-full h-72 [perspective:1000px] cursor-pointer group select-none"
               onClick={() => setIsFlipped(!isFlipped)}
             >
               <div 
@@ -215,34 +215,34 @@ export default function Flashcards({ awardXp }) {
                 
                 {/* FRONT SIDE (Question) */}
                 <div 
-                  className="absolute inset-0 w-full h-full rounded-3xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 flex flex-col justify-between p-6 transition-colors"
+                  className="absolute inset-0 w-full h-full rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 shadow-md flex flex-col justify-between p-6 transition-colors"
                   style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                 >
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest text-left">QUESTION</span>
+                  <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest text-left">QUESTION</span>
                   <div className="flex-1 flex items-center justify-center">
-                    <p className="text-lg md:text-xl font-bold text-slate-100 px-4 leading-relaxed">
+                    <p className="text-lg md:text-xl font-bold text-slate-800 dark:text-slate-100 px-4 leading-relaxed">
                       {sessionCards[currentCardIndex].front}
                     </p>
                   </div>
-                  <span className="text-xxs font-extrabold text-indigo-400 uppercase tracking-wide">Click card to reveal answer 🔄</span>
+                  <span className="text-xxs font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">Click card to reveal answer 🔄</span>
                 </div>
 
                 {/* BACK SIDE (Answer) */}
                 <div 
-                  className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-indigo-950/70 to-violet-950/50 border border-indigo-500/30 flex flex-col justify-between p-6"
+                  className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950/70 dark:to-violet-950/50 border border-indigo-200 dark:border-indigo-500/30 shadow-md flex flex-col justify-between p-6"
                   style={{ 
                     backfaceVisibility: 'hidden', 
                     WebkitBackfaceVisibility: 'hidden', 
                     transform: 'rotateY(180deg)' 
                   }}
                 >
-                  <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest text-left">ANSWER / REMARK</span>
+                  <span className="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest text-left">ANSWER / REMARK</span>
                   <div className="flex-1 flex items-center justify-center overflow-y-auto">
-                    <p className="text-base font-semibold text-slate-200 px-4 leading-relaxed">
+                    <p className="text-base font-semibold text-slate-800 dark:text-slate-200 px-4 leading-relaxed">
                       {sessionCards[currentCardIndex].back}
                     </p>
                   </div>
-                  <span className="text-xxs font-extrabold text-slate-500 uppercase tracking-wide">Click card to view question 🔄</span>
+                  <span className="text-xxs font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Click card to view question 🔄</span>
                 </div>
 
               </div>
@@ -253,14 +253,14 @@ export default function Flashcards({ awardXp }) {
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => handleRateCard(false)}
-              className="bg-rose-950/20 hover:bg-rose-900/20 border border-rose-900/30 hover:border-rose-500/40 text-rose-400 py-3.5 px-6 rounded-2xl text-sm font-bold transition-all active:scale-[0.98]"
+              className="bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 dark:bg-rose-950/20 dark:border-rose-900/30 dark:text-rose-400 py-3.5 px-6 rounded-2xl text-sm font-bold transition-all active:scale-[0.98] shadow-xs cursor-pointer"
             >
               ❌ Needs Work
             </button>
             
             <button
               onClick={() => handleRateCard(true)}
-              className="bg-emerald-950/20 hover:bg-emerald-900/20 border border-emerald-900/30 hover:border-emerald-500/40 text-emerald-400 py-3.5 px-6 rounded-2xl text-sm font-bold transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+              className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-600 dark:bg-emerald-950/20 dark:border-emerald-900/30 dark:text-emerald-400 py-3.5 px-6 rounded-2xl text-sm font-bold transition-all active:scale-[0.98] flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
             >
               <Sparkles className="h-4.5 w-4.5 animate-pulse text-amber-500" />
               <span>Know It!</span>
@@ -270,7 +270,7 @@ export default function Flashcards({ awardXp }) {
           <div className="text-center">
             <button
               onClick={() => setIsStudyMode(false)}
-              className="text-slate-500 hover:text-slate-300 text-xs font-semibold underline"
+              className="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 text-xs font-semibold underline cursor-pointer"
             >
               Cancel Session
             </button>
@@ -285,65 +285,65 @@ export default function Flashcards({ awardXp }) {
           
           {/* Left panel: Add Card Form & Deck Summary */}
           <div className="lg:col-span-1 space-y-6">
-            <div className="bg-slate-900/50 border border-slate-850 p-6 rounded-3xl space-y-4">
+            <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-850 p-6 rounded-3xl space-y-4 shadow-xs">
               <div>
-                <h3 className="text-lg font-black text-slate-100 truncate">{activeDeck.name}</h3>
-                <p className="text-xs text-slate-400 mt-1">{activeDeck.description}</p>
+                <h3 className="text-lg font-black text-slate-800 dark:text-slate-100 truncate">{activeDeck.name}</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{activeDeck.description}</p>
               </div>
 
-              <div className="h-px bg-slate-800" />
+              <div className="h-px bg-slate-200 dark:bg-slate-800" />
 
-              <div className="flex items-center justify-between text-xs text-slate-400 font-bold">
+              <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 font-bold">
                 <span>Cards count:</span>
-                <span className="text-slate-200">{activeDeck.cards.length} items</span>
+                <span className="text-slate-800 dark:text-slate-200">{activeDeck.cards.length} items</span>
               </div>
 
               {activeDeck.cards.length > 0 ? (
                 <button
                   onClick={handleStartStudy}
-                  className="w-full bg-indigo-650 hover:bg-indigo-600 text-white py-3 px-5 rounded-2xl text-xs font-black shadow-lg shadow-indigo-650/15 active:scale-95 flex items-center justify-center space-x-2 transition-all"
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 px-5 rounded-2xl text-xs font-black shadow-md shadow-indigo-600/20 active:scale-95 flex items-center justify-center space-x-2 transition-all cursor-pointer"
                 >
                   <Layers className="h-4.5 w-4.5" />
                   <span>Ignite Revision Session</span>
                 </button>
               ) : (
-                <div className="flex gap-1.5 items-center p-3 bg-indigo-950/20 border border-indigo-900/50 rounded-xl text-xs text-indigo-400 font-medium">
-                  <AlertCircle className="h-4.5 w-4.5 text-indigo-400 flex-shrink-0" />
+                <div className="flex gap-1.5 items-center p-3 bg-indigo-50 border border-indigo-200 dark:bg-indigo-950/20 dark:border-indigo-900/50 rounded-xl text-xs text-indigo-600 dark:text-indigo-400 font-medium">
+                  <AlertCircle className="h-4.5 w-4.5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
                   <span>Add cards below to start reviewing!</span>
                 </div>
               )}
             </div>
 
             {/* Add Card Form */}
-            <div className="bg-slate-900/30 border border-slate-850 p-6 rounded-3xl space-y-4">
-              <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest">Append New Card</h4>
+            <div className="bg-slate-50/70 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-850 p-6 rounded-3xl space-y-4 shadow-xs">
+              <h4 className="text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Append New Card</h4>
               
               <div className="space-y-3">
                 <div>
-                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Front (Question / Prompt)</label>
+                  <label className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider block mb-1">Front (Question / Prompt)</label>
                   <textarea
                     placeholder="E.g., What is Newton's 2nd Law?"
                     value={newCardFront}
                     onChange={(e) => setNewCardFront(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-100 font-semibold"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-800 dark:text-slate-100 font-semibold shadow-xs"
                     rows={3}
                   />
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Back (Answer / Definition)</label>
+                  <label className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider block mb-1">Back (Answer / Definition)</label>
                   <textarea
                     placeholder="E.g., F = ma. The acceleration of an object is dependent upon the net force..."
                     value={newCardBack}
                     onChange={(e) => setNewCardBack(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-100 font-semibold"
+                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-800 dark:text-slate-100 font-semibold shadow-xs"
                     rows={3}
                   />
                 </div>
 
                 <button
                   onClick={handleAddCard}
-                  className="w-full bg-slate-800 hover:bg-slate-700 border border-white/5 text-indigo-400 hover:text-white py-3.5 rounded-2xl text-xs font-bold active:scale-[0.98] transition-all"
+                  className="w-full bg-indigo-50 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-slate-700 border border-indigo-200 dark:border-white/5 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 py-3.5 rounded-2xl text-xs font-bold active:scale-[0.98] transition-all cursor-pointer shadow-xs"
                 >
                   Create Card (+5 XP)
                 </button>
@@ -353,12 +353,12 @@ export default function Flashcards({ awardXp }) {
 
           {/* Right panel: Deck's Card List */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Deck Cards ({activeDeck.cards.length})</h4>
+            <h4 className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Deck Cards ({activeDeck.cards.length})</h4>
 
             <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
               {activeDeck.cards.length === 0 ? (
-                <div className="p-16 text-center border border-dashed border-slate-800 rounded-3xl text-slate-500 flex flex-col items-center">
-                  <Brain className="h-10 w-10 text-slate-700 animate-pulse mb-2" />
+                <div className="p-16 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl text-slate-400 dark:text-slate-500 flex flex-col items-center">
+                  <Brain className="h-10 w-10 text-slate-300 dark:text-slate-700 animate-pulse mb-2" />
                   <p className="font-semibold text-sm">No cards in this deck.</p>
                   <p className="text-xs">Create your first revision card using the left panel form.</p>
                 </div>
@@ -366,19 +366,19 @@ export default function Flashcards({ awardXp }) {
                 activeDeck.cards.map((c, index) => (
                   <div 
                     key={c.id}
-                    className="bg-slate-900/40 border border-slate-850 p-4.5 rounded-2xl flex items-start justify-between group gap-4"
+                    className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-850 p-4.5 rounded-2xl flex items-start justify-between group gap-4 shadow-xs"
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2">
-                        <span className="text-[10px] font-black bg-slate-850 px-2 py-0.5 rounded-md text-slate-400">#{index+1}</span>
+                        <span className="text-[10px] font-black bg-slate-100 dark:bg-slate-850 px-2 py-0.5 rounded-md text-slate-600 dark:text-slate-400">#{index+1}</span>
                       </div>
-                      <p className="text-sm font-bold text-slate-200 mt-2">Q: {c.front}</p>
-                      <p className="text-xs text-slate-450 mt-1 font-semibold pl-4 border-l border-indigo-950">A: {c.back}</p>
+                      <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-2">Q: {c.front}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-450 mt-1 font-semibold pl-4 border-l-2 border-indigo-300 dark:border-indigo-950">A: {c.back}</p>
                     </div>
 
                     <button
                       onClick={() => handleDeleteCard(c.id)}
-                      className="text-slate-500 hover:text-rose-500 p-2 rounded-xl hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100"
+                      className="text-slate-400 hover:text-rose-600 p-2 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -396,33 +396,33 @@ export default function Flashcards({ awardXp }) {
         <div className="space-y-6">
           
           {/* Deck creator form */}
-          <div className="p-5 bg-slate-900/30 border border-slate-850 rounded-2xl grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+          <div className="p-5 bg-slate-50/80 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-850 rounded-2xl grid grid-cols-1 md:grid-cols-4 gap-4 items-end shadow-xs">
             <div className="md:col-span-2">
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 block">Deck Name</label>
+              <label className="text-xs font-bold text-slate-600 dark:text-slate-500 uppercase tracking-wider mb-1.5 block">Deck Name</label>
               <input
                 type="text"
                 placeholder="E.g., Chemistry: Organic Equations"
                 value={newDeckName}
                 onChange={(e) => setNewDeckName(e.target.value)}
-                className="w-full px-4 py-3 rounded-2xl border border-slate-800 bg-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-100 font-semibold"
+                className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-800 dark:text-slate-100 font-semibold shadow-xs"
               />
             </div>
             
             <div>
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 block">Description</label>
+              <label className="text-xs font-bold text-slate-600 dark:text-slate-500 uppercase tracking-wider mb-1.5 block">Description</label>
               <input
                 type="text"
                 placeholder="E.g., Carbon chains & reactions..."
                 value={newDeckDesc}
                 onChange={(e) => setNewDeckDesc(e.target.value)}
-                className="w-full px-4 py-3 rounded-2xl border border-slate-800 bg-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-100 font-semibold"
+                className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-800 dark:text-slate-100 font-semibold shadow-xs"
               />
             </div>
 
             <div>
               <button
                 onClick={handleCreateDeck}
-                className="w-full bg-indigo-650 hover:bg-indigo-600 text-white py-3 rounded-2xl text-xs font-black shadow-lg shadow-indigo-650/10 active:scale-98 transition-all flex items-center justify-center space-x-1.5"
+                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-2xl text-xs font-black shadow-md shadow-indigo-600/20 active:scale-98 transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
               >
                 <Plus className="h-4.5 w-4.5" />
                 <span>Create Deck (+10 XP)</span>
@@ -436,25 +436,25 @@ export default function Flashcards({ awardXp }) {
               <div
                 key={d.id}
                 onClick={() => setActiveDeckId(d.id)}
-                className="bg-slate-900/40 border border-slate-850 hover:border-slate-700 hover:scale-[1.02] p-5 rounded-3xl flex flex-col justify-between h-48 cursor-pointer group transition-all duration-300 relative overflow-hidden"
+                className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-850 hover:border-indigo-300 dark:hover:border-slate-700 hover:scale-[1.01] p-5 rounded-3xl flex flex-col justify-between h-48 cursor-pointer group transition-all duration-300 relative overflow-hidden shadow-xs hover:shadow-md"
               >
                 {/* Ambient glow in corner */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-650/5 blur-2xl rounded-full" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 blur-2xl rounded-full" />
                 
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black bg-indigo-950/60 border border-indigo-900/50 text-indigo-400 px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span className="text-[10px] font-black bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full uppercase tracking-wider">
                       {d.cards.length} Cards
                     </span>
                     <button
                       onClick={(e) => handleDeleteDeck(d.id, e)}
-                      className="text-slate-500 hover:text-rose-500 p-1.5 rounded-xl hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100"
+                      className="text-slate-400 hover:text-rose-600 p-1.5 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
 
-                  <h3 className="text-base font-black text-slate-150 mt-4 group-hover:text-indigo-400 transition-colors truncate">
+                  <h3 className="text-base font-black text-slate-800 dark:text-slate-150 mt-4 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
                     {d.name}
                   </h3>
                   <p className="text-xs text-slate-500 font-semibold mt-1.5 line-clamp-2">
@@ -462,7 +462,7 @@ export default function Flashcards({ awardXp }) {
                   </p>
                 </div>
 
-                <div className="border-t border-slate-850/60 pt-3 flex items-center justify-between text-xxs font-black text-indigo-400 uppercase tracking-widest mt-4">
+                <div className="border-t border-slate-100 dark:border-slate-850/60 pt-3 flex items-center justify-between text-xxs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mt-4">
                   <span>open deck workspace</span>
                   <span>→</span>
                 </div>

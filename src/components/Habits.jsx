@@ -127,11 +127,11 @@ export default function Habits({ awardXp, setFocusScore }) {
   const progressPercent = habits.length > 0 ? Math.round((completedCount / habits.length) * 100) : 0
 
   return (
-    <div className="glass rounded-3xl p-6 md:p-8 shadow-xl space-y-6">
+    <div className="glass rounded-3xl p-6 md:p-8 shadow-sm dark:shadow-xl space-y-6">
       {/* Header Info */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-amber-400 to-indigo-500 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-amber-500 to-indigo-600 dark:from-amber-400 dark:to-indigo-500 bg-clip-text text-transparent">
             Daily Habits & Streaks
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
@@ -140,20 +140,20 @@ export default function Habits({ awardXp, setFocusScore }) {
         </div>
 
         {/* Streaks Widget */}
-        <div className="flex items-center space-x-4 bg-slate-900/60 border border-slate-800 p-3 rounded-2xl">
+        <div className="flex items-center space-x-4 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl shadow-xs">
           <div className="flex items-center space-x-2">
-            <Flame className={`h-6 w-6 ${streakData.currentStreak > 0 ? 'text-orange-500 animate-bounce' : 'text-slate-600'}`} />
+            <Flame className={`h-6 w-6 ${streakData.currentStreak > 0 ? 'text-orange-500 animate-bounce' : 'text-slate-400 dark:text-slate-600'}`} />
             <div>
               <p className="text-xxs font-bold text-slate-500 uppercase tracking-widest leading-none">Streak</p>
-              <p className="text-lg font-black text-slate-100 leading-none mt-1">{streakData.currentStreak} Days</p>
+              <p className="text-lg font-black text-slate-800 dark:text-slate-100 leading-none mt-1">{streakData.currentStreak} Days</p>
             </div>
           </div>
-          <div className="h-8 w-px bg-slate-800" />
+          <div className="h-8 w-px bg-slate-200 dark:bg-slate-800" />
           <div className="flex items-center space-x-2">
             <Award className="h-6 w-6 text-amber-500" />
             <div>
               <p className="text-xxs font-bold text-slate-500 uppercase tracking-widest leading-none">Best Streak</p>
-              <p className="text-lg font-black text-slate-100 leading-none mt-1">{streakData.maxStreak} Days</p>
+              <p className="text-lg font-black text-slate-800 dark:text-slate-100 leading-none mt-1">{streakData.maxStreak} Days</p>
             </div>
           </div>
         </div>
@@ -165,8 +165,8 @@ export default function Habits({ awardXp, setFocusScore }) {
         {/* List of Habits */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Your Habits Checklist</h3>
-            <span className="text-xs font-bold text-indigo-400 bg-indigo-950/60 border border-indigo-900/50 px-2.5 py-0.5 rounded-full">
+            <h3 className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Your Habits Checklist</h3>
+            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 px-2.5 py-0.5 rounded-full">
               +{completedCount * 15} XP Earned
             </span>
           </div>
@@ -179,11 +179,11 @@ export default function Habits({ awardXp, setFocusScore }) {
               value={newHabitText}
               onChange={(e) => setNewHabitText(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddHabit()}
-              className="flex-1 px-4 py-3 rounded-2xl border border-slate-800 bg-slate-900/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold text-slate-100"
+              className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold text-slate-800 dark:text-slate-100 placeholder:text-slate-400 shadow-xs"
             />
             <button
               onClick={handleAddHabit}
-              className="bg-indigo-650 hover:bg-indigo-600 text-white p-3 rounded-2xl font-bold active:scale-95 transition-all shadow-md shadow-indigo-650/10 flex items-center justify-center"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-2xl font-bold active:scale-95 transition-all shadow-md shadow-indigo-600/20 flex items-center justify-center cursor-pointer"
             >
               <Plus className="h-5 w-5" />
             </button>
@@ -192,7 +192,7 @@ export default function Habits({ awardXp, setFocusScore }) {
           {/* Habits Feed */}
           <div className="space-y-3">
             {habits.length === 0 ? (
-              <div className="p-8 text-center border border-dashed border-slate-800 rounded-3xl text-slate-500">
+              <div className="p-8 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl text-slate-400 dark:text-slate-500">
                 <p className="font-semibold text-sm">Your habit sheet is empty.</p>
                 <p className="text-xs mt-1">Add custom habits above to begin your streaks!</p>
               </div>
@@ -203,24 +203,24 @@ export default function Habits({ awardXp, setFocusScore }) {
                   onClick={() => handleToggleHabit(h.id)}
                   className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 cursor-pointer group ${
                     h.completed
-                      ? 'bg-emerald-950/10 border-emerald-900/30 opacity-70'
-                      : 'bg-slate-900/40 border-slate-850 hover:border-slate-700 hover:scale-[1.01]'
+                      ? 'bg-emerald-50/60 border-emerald-200/80 dark:bg-emerald-950/10 dark:border-emerald-900/30 opacity-75'
+                      : 'bg-white border-slate-200 dark:bg-slate-900/40 dark:border-slate-850 hover:border-indigo-300 dark:hover:border-slate-700 hover:scale-[1.01] shadow-xs'
                   }`}
                 >
                   <div className="flex items-center space-x-3.5 flex-1 min-w-0">
                     <div className={`h-6 w-6 rounded-lg flex items-center justify-center border transition-all ${
-                      h.completed ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-slate-700 group-hover:border-indigo-500'
+                      h.completed ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-slate-300 dark:border-slate-700 group-hover:border-indigo-500'
                     }`}>
                       {h.completed && <Check className="h-4.5 w-4.5" />}
                     </div>
-                    <span className={`text-sm font-semibold truncate ${h.completed ? 'line-through text-slate-500' : 'text-slate-100'}`}>
+                    <span className={`text-sm font-semibold truncate ${h.completed ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-800 dark:text-slate-100'}`}>
                       {h.text}
                     </span>
                   </div>
 
                   <button
                     onClick={(e) => { e.stopPropagation(); handleDeleteHabit(h.id); }}
-                    className="text-slate-500 hover:text-rose-500 p-1.5 rounded-xl hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100"
+                    className="text-slate-400 hover:text-rose-600 p-1.5 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
                   >
                     <Trash2 className="h-4.5 w-4.5" />
                   </button>
@@ -232,18 +232,18 @@ export default function Habits({ awardXp, setFocusScore }) {
 
         {/* Progress & Simulation Box */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-slate-900/40 border border-slate-850 p-6 rounded-3xl flex flex-col justify-between space-y-6">
+          <div className="bg-slate-50/80 dark:bg-slate-900/40 border border-slate-200/90 dark:border-slate-850 p-6 rounded-3xl flex flex-col justify-between space-y-6 shadow-xs">
             
             {/* Progress Area */}
             <div>
-              <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Daily Consistency</h4>
+              <h4 className="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-4">Daily Consistency</h4>
               
               <div className="relative flex flex-col items-center justify-center py-4">
                 
                 {/* SVG Progress Arc */}
                 <div className="relative w-36 h-36 flex items-center justify-center">
                   <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="8" />
+                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(0,0,0,0.05)" strokeWidth="8" />
                     <circle 
                       cx="50" cy="50" r="44" 
                       fill="none" 
@@ -256,22 +256,22 @@ export default function Habits({ awardXp, setFocusScore }) {
                     />
                     <defs>
                       <linearGradient id="habitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#fbbf24" />
-                        <stop offset="100%" stopColor="#6366f1" />
+                        <stop offset="0%" stopColor="#f59e0b" />
+                        <stop offset="100%" stopColor="#4f46e5" />
                       </linearGradient>
                     </defs>
                   </svg>
                   <div className="flex flex-col items-center justify-center z-10">
-                    <span className="text-2xl font-black text-slate-100">{progressPercent}%</span>
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">cleared</span>
+                    <span className="text-2xl font-black text-slate-800 dark:text-slate-100">{progressPercent}%</span>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">cleared</span>
                   </div>
                 </div>
               </div>
 
               {/* Progress Bar Subtitle */}
-              <div className="text-center mt-2 text-xs font-semibold text-slate-400">
+              <div className="text-center mt-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
                 {progressPercent === 100 ? (
-                  <span className="text-emerald-400 flex items-center justify-center gap-1">
+                  <span className="text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 font-bold">
                     <Sparkles className="h-4.5 w-4.5 animate-pulse" /> All habits locked in! +50 XP Streak Bonus!
                   </span>
                 ) : (
@@ -281,19 +281,19 @@ export default function Habits({ awardXp, setFocusScore }) {
             </div>
 
             {/* Streak Rule Info */}
-            <div className="p-3 bg-amber-500/5 border border-amber-500/10 rounded-2xl text-[11px] text-amber-500/90 font-medium flex gap-2">
-              <ShieldAlert className="h-5 w-5 flex-shrink-0 text-amber-500" />
+            <div className="p-3 bg-amber-50 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-500/10 rounded-2xl text-[11px] text-amber-800 dark:text-amber-500/90 font-medium flex gap-2">
+              <ShieldAlert className="h-5 w-5 flex-shrink-0 text-amber-600 dark:text-amber-500" />
               <span>Complete all daily habits before sleeping to advance your streak. Skipping a day resets it!</span>
             </div>
 
             {/* Simulator for testing */}
-            <div className="border-t border-slate-800/80 pt-4">
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 text-center">Prototype Tester Control</p>
+            <div className="border-t border-slate-200/80 dark:border-slate-800/80 pt-4">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 text-center">Prototype Tester Control</p>
               <button
                 onClick={handleSimulateNextDay}
-                className="w-full bg-slate-800 hover:bg-slate-700 border border-white/5 text-slate-350 hover:text-white py-2.5 px-4 rounded-2xl text-xs font-bold transition-all flex items-center justify-center space-x-2 active:scale-[0.98]"
+                className="w-full bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-white/5 text-slate-700 hover:text-slate-900 dark:text-slate-350 dark:hover:text-white py-2.5 px-4 rounded-2xl text-xs font-bold transition-all flex items-center justify-center space-x-2 active:scale-[0.98] shadow-xs cursor-pointer"
               >
-                <Calendar className="h-4.5 w-4.5 text-indigo-400" />
+                <Calendar className="h-4.5 w-4.5 text-indigo-600 dark:text-indigo-400" />
                 <span>Simulate Tomorrow</span>
               </button>
             </div>

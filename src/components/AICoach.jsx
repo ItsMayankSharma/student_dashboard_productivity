@@ -200,14 +200,14 @@ Or type custom questions relating to programming or science!`;
         {lines.map((line, idx) => {
           // Headers
           if (line.startsWith('### ')) {
-            return <h4 key={idx} className="text-base font-black text-slate-100 mt-2">{line.replace('### ', '')}</h4>
+            return <h4 key={idx} className="text-base font-black text-slate-800 dark:text-slate-100 mt-2">{line.replace('### ', '')}</h4>
           }
           if (line.startsWith('#### ')) {
-            return <h5 key={idx} className="text-xs font-black text-indigo-400 mt-2 uppercase tracking-wide">{line.replace('#### ', '')}</h5>
+            return <h5 key={idx} className="text-xs font-black text-indigo-600 dark:text-indigo-400 mt-2 uppercase tracking-wide">{line.replace('#### ', '')}</h5>
           }
           // Blockquotes
           if (line.startsWith('> ')) {
-            return <blockquote key={idx} className="border-l-4 border-amber-500 pl-3 italic text-slate-300 bg-slate-950/40 py-2 rounded-r-xl my-2">{line.replace('> ', '')}</blockquote>
+            return <blockquote key={idx} className="border-l-4 border-amber-500 pl-3 italic text-slate-700 dark:text-slate-300 bg-amber-500/10 dark:bg-slate-950/40 py-2 rounded-r-xl my-2">{line.replace('> ', '')}</blockquote>
           }
           // Codeblocks (inline code matches)
           const codeMatch = line.match(/`([^`]+)`/g)
@@ -220,7 +220,7 @@ Or type custom questions relating to programming or science!`;
                   <span key={pIdx}>
                     {p}
                     {matches[pIdx] && (
-                      <code className="bg-slate-950 text-indigo-400 px-1.5 py-0.5 rounded font-mono text-xs border border-white/5">{matches[pIdx]}</code>
+                      <code className="bg-slate-100 dark:bg-slate-950 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded font-mono text-xs border border-slate-200 dark:border-white/5">{matches[pIdx]}</code>
                     )}
                   </span>
                 ))}
@@ -228,7 +228,7 @@ Or type custom questions relating to programming or science!`;
             )
           }
 
-          return <p key={idx} className="text-slate-200">{line}</p>
+          return <p key={idx} className="text-slate-700 dark:text-slate-200">{line}</p>
         })}
       </div>
     )
@@ -244,15 +244,15 @@ Or type custom questions relating to programming or science!`;
 
     return (
       <div className="space-y-4 text-sm leading-relaxed font-semibold">
-        <h4 className="text-base font-black text-slate-100 mt-1 flex items-center gap-1.5">
-          <Sparkles className="h-4.5 w-4.5 text-indigo-400 animate-pulse" />
+        <h4 className="text-base font-black text-slate-800 dark:text-slate-100 mt-1 flex items-center gap-1.5">
+          <Sparkles className="h-4.5 w-4.5 text-indigo-600 dark:text-indigo-400 animate-pulse" />
           <span>Interactive Physics Recall Quiz</span>
         </h4>
 
         {/* Q1 */}
-        <div className="bg-slate-950/40 p-4 border border-white/5 rounded-2xl space-y-2">
-          <p className="text-slate-100 text-xs font-bold uppercase tracking-wide text-indigo-400">Question 1</p>
-          <p className="text-slate-200">What does the variable 'U' represent in thermodynamic equations?</p>
+        <div className="bg-slate-50 dark:bg-slate-950/40 p-4 border border-slate-200 dark:border-white/5 rounded-2xl space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">Question 1</p>
+          <p className="text-slate-800 dark:text-slate-200 font-medium">What does the variable 'U' represent in thermodynamic equations?</p>
           
           <div className="space-y-1.5 mt-3">
             {[
@@ -269,35 +269,35 @@ Or type custom questions relating to programming or science!`;
                   onClick={() => handleQuizAnswer(msg.id, 1, oIdx, opt.correct)}
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
                     q1Ans === undefined 
-                      ? 'bg-slate-900 border-slate-800 hover:border-indigo-500 text-slate-300' 
+                      ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500 text-slate-700 dark:text-slate-300 shadow-xs' 
                       : selected 
                         ? opt.correct 
-                          ? 'bg-emerald-950/20 border-emerald-500 text-emerald-400' 
-                          : 'bg-rose-950/20 border-rose-500 text-rose-400'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-500 text-emerald-700 dark:text-emerald-400' 
+                          : 'bg-rose-50 dark:bg-rose-950/20 border-rose-500 text-rose-700 dark:text-rose-400'
                         : opt.correct
-                          ? 'bg-emerald-950/10 border-emerald-900/40 text-emerald-500/80'
-                          : 'bg-slate-900/30 border-slate-950 text-slate-600'
+                          ? 'bg-emerald-50/60 dark:bg-emerald-950/10 border-emerald-200 dark:border-emerald-900/40 text-emerald-600 dark:text-emerald-500/80'
+                          : 'bg-slate-100/60 dark:bg-slate-900/30 border-slate-200 dark:border-slate-950 text-slate-400 dark:text-slate-600'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span>{opt.text}</span>
-                    {q1Ans !== undefined && opt.correct && <Check className="h-3.5 w-3.5 text-emerald-400" />}
+                    {q1Ans !== undefined && opt.correct && <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />}
                   </div>
                 </button>
               )
             })}
           </div>
           {q1Ans && (
-            <p className={`text-[10px] font-bold ${q1Ans.isCorrect ? 'text-emerald-400' : 'text-rose-400'}`}>
+            <p className={`text-[10px] font-bold ${q1Ans.isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
               {q1Ans.isCorrect ? "Correct! +5 XP awarded! U is the symbol for Internal Energy." : "Incorrect! Option B was the correct answer. Study thermodynamics rules!"}
             </p>
           )}
         </div>
 
         {/* Q2 */}
-        <div className="bg-slate-950/40 p-4 border border-white/5 rounded-2xl space-y-2">
-          <p className="text-slate-100 text-xs font-bold uppercase tracking-wide text-indigo-400">Question 2</p>
-          <p className="text-slate-200">In an isothermal process, what variable remains constant?</p>
+        <div className="bg-slate-50 dark:bg-slate-950/40 p-4 border border-slate-200 dark:border-white/5 rounded-2xl space-y-2">
+          <p className="text-xs font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">Question 2</p>
+          <p className="text-slate-800 dark:text-slate-200 font-medium">In an isothermal process, what variable remains constant?</p>
           
           <div className="space-y-1.5 mt-3">
             {[
@@ -314,26 +314,26 @@ Or type custom questions relating to programming or science!`;
                   onClick={() => handleQuizAnswer(msg.id, 2, oIdx, opt.correct)}
                   className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
                     q2Ans === undefined 
-                      ? 'bg-slate-900 border-slate-800 hover:border-indigo-500 text-slate-300' 
+                      ? 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500 text-slate-700 dark:text-slate-300 shadow-xs' 
                       : selected 
                         ? opt.correct 
-                          ? 'bg-emerald-950/20 border-emerald-500 text-emerald-400' 
-                          : 'bg-rose-950/20 border-rose-500 text-rose-400'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/20 border-emerald-500 text-emerald-700 dark:text-emerald-400' 
+                          : 'bg-rose-50 dark:bg-rose-950/20 border-rose-500 text-rose-700 dark:text-rose-400'
                         : opt.correct
-                          ? 'bg-emerald-950/10 border-emerald-900/40 text-emerald-500/80'
-                          : 'bg-slate-900/30 border-slate-950 text-slate-600'
+                          ? 'bg-emerald-50/60 dark:bg-emerald-950/10 border-emerald-200 dark:border-emerald-900/40 text-emerald-600 dark:text-emerald-500/80'
+                          : 'bg-slate-100/60 dark:bg-slate-900/30 border-slate-200 dark:border-slate-950 text-slate-400 dark:text-slate-600'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span>{opt.text}</span>
-                    {q2Ans !== undefined && opt.correct && <Check className="h-3.5 w-3.5 text-emerald-400" />}
+                    {q2Ans !== undefined && opt.correct && <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />}
                   </div>
                 </button>
               )
             })}
           </div>
           {q2Ans && (
-            <p className={`text-[10px] font-bold ${q2Ans.isCorrect ? 'text-emerald-400' : 'text-rose-400'}`}>
+            <p className={`text-[10px] font-bold ${q2Ans.isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
               {q2Ans.isCorrect ? "Correct! +5 XP awarded! 'Iso' = same, 'thermal' = temperature (T)." : "Incorrect! Option C was the correct answer. Temperature remains constant."}
             </p>
           )}
@@ -348,12 +348,12 @@ Or type custom questions relating to programming or science!`;
       {/* HEADER INFO */}
       <div className="pb-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
-          <div className="bg-indigo-950 text-indigo-400 p-2.5 rounded-xl border border-indigo-900/40">
+          <div className="bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 p-2.5 rounded-xl border border-indigo-200 dark:border-indigo-900/40">
             <Bot className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-black text-slate-150 leading-none">StudyBuddy AI Coach</h3>
-            <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1 mt-1 leading-none">
+            <h3 className="text-base font-black text-slate-800 dark:text-slate-100 leading-none">StudyBuddy AI Coach</h3>
+            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 mt-1 leading-none">
               <span className="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-ping" /> Online & Responsive
             </span>
           </div>
@@ -366,7 +366,7 @@ Or type custom questions relating to programming or science!`;
               setQuizAnswers({})
             }
           }}
-          className="text-xs text-slate-500 hover:text-slate-350 font-bold border border-slate-800 bg-slate-900/40 px-3 py-1.5 rounded-xl transition-all"
+          className="text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 font-bold border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900/40 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
         >
           Clear Logs
         </button>
@@ -384,8 +384,8 @@ Or type custom questions relating to programming or science!`;
               {/* Avatar */}
               <div className={`h-8 w-8 rounded-xl flex items-center justify-center border text-xs flex-shrink-0 mt-0.5 ${
                 isBot 
-                  ? 'bg-indigo-950 border-indigo-900/50 text-indigo-400 shadow-md shadow-indigo-950/20' 
-                  : 'bg-violet-950 border-violet-900/50 text-violet-400 shadow-md shadow-violet-950/20'
+                  ? 'bg-indigo-50 dark:bg-indigo-950 border-indigo-200 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 shadow-xs' 
+                  : 'bg-violet-50 dark:bg-violet-950 border-violet-200 dark:border-violet-900/50 text-violet-600 dark:text-violet-400 shadow-xs'
               }`}>
                 {isBot ? <Bot className="h-4.5 w-4.5" /> : <User className="h-4.5 w-4.5" />}
               </div>
@@ -393,12 +393,12 @@ Or type custom questions relating to programming or science!`;
               {/* Message Bubble */}
               <div className={`p-4 rounded-2xl ${
                 isBot 
-                  ? 'bg-slate-900/60 border border-slate-850/60 text-slate-200 rounded-tl-sm shadow-md' 
-                  : 'bg-indigo-600 text-white rounded-tr-sm shadow-lg shadow-indigo-650/15'
+                  ? 'bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-sm shadow-xs' 
+                  : 'bg-indigo-600 text-white rounded-tr-sm shadow-lg shadow-indigo-600/15'
               }`}>
                 {isBot ? renderMessageText(msg) : <p className="text-sm font-semibold whitespace-pre-wrap leading-relaxed">{msg.text}</p>}
                 
-                <span className={`text-[9px] font-bold block mt-2 text-right ${isBot ? 'text-slate-600' : 'text-indigo-200'}`}>
+                <span className={`text-[9px] font-bold block mt-2 text-right ${isBot ? 'text-slate-400 dark:text-slate-500' : 'text-indigo-200'}`}>
                   {msg.timestamp}
                 </span>
               </div>
@@ -409,10 +409,10 @@ Or type custom questions relating to programming or science!`;
         {/* Typing bubble */}
         {isTyping && (
           <div className="flex items-start gap-3 mr-auto max-w-[85%] animate-pulse">
-            <div className="h-8 w-8 rounded-xl bg-indigo-950 border border-indigo-900/50 text-indigo-400 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+            <div className="h-8 w-8 rounded-xl bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
               <Bot className="h-4.5 w-4.5" />
             </div>
-            <div className="p-4 bg-slate-900/60 border border-slate-850/60 rounded-2xl rounded-tl-sm flex items-center space-x-1.5 h-11">
+            <div className="p-4 bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 rounded-2xl rounded-tl-sm flex items-center space-x-1.5 h-11">
               <span className="h-2 w-2 bg-indigo-500 rounded-full animate-bounce" />
               <span className="h-2 w-2 bg-indigo-500 rounded-full animate-bounce [animation-delay:0.2s]" />
               <span className="h-2 w-2 bg-indigo-500 rounded-full animate-bounce [animation-delay:0.4s]" />
@@ -423,15 +423,15 @@ Or type custom questions relating to programming or science!`;
       </div>
 
       {/* QUICK COMMANDS CARDS */}
-      <div className="py-2.5 border-t border-slate-850 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
-        <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider flex items-center gap-1.5 pr-1 flex-shrink-0">
+      <div className="py-2.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
+        <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider flex items-center gap-1.5 pr-1 flex-shrink-0">
           <HelpCircle className="h-3.5 w-3.5 text-indigo-500" /> Quick Ask:
         </span>
         {quickCommands.map((cmd) => (
           <button
             key={cmd.text}
             onClick={() => handleSendCommand(cmd.text)}
-            className="px-3.5 py-1.5 bg-slate-900/60 hover:bg-indigo-950/20 border border-slate-800 hover:border-indigo-550/30 text-slate-350 hover:text-indigo-400 rounded-full text-xs font-bold transition-all active:scale-95 flex-shrink-0 cursor-pointer"
+            className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-900/60 hover:bg-indigo-50 dark:hover:bg-indigo-950/20 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-500/30 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-full text-xs font-bold transition-all active:scale-95 flex-shrink-0 cursor-pointer"
           >
             {cmd.label}
           </button>
@@ -446,11 +446,11 @@ Or type custom questions relating to programming or science!`;
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendCommand(inputValue)}
-          className="flex-1 px-4 py-3 rounded-2xl border border-slate-800 bg-slate-900/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold text-slate-100"
+          className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold text-slate-800 dark:text-slate-100 placeholder:text-slate-400"
         />
         <button
           onClick={() => handleSendCommand(inputValue)}
-          className="bg-indigo-650 hover:bg-indigo-600 text-white p-3.5 rounded-2xl font-bold active:scale-95 transition-all shadow-md shadow-indigo-650/10 flex items-center justify-center"
+          className="bg-indigo-600 hover:bg-indigo-500 text-white p-3.5 rounded-2xl font-bold active:scale-95 transition-all shadow-md shadow-indigo-600/15 flex items-center justify-center cursor-pointer"
         >
           <Send className="h-5 w-5" />
         </button>
