@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
-import { Edit2, Check, Sparkles, GraduationCap, LogOut, Trophy } from 'lucide-react'
+import { Edit2, Check, Sparkles, GraduationCap, LogOut, Trophy, Sun, Moon } from 'lucide-react'
 
 // Default tasks if local storage is blank
 const defaultTasks = [
@@ -17,6 +17,24 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('studydash_loggedin') === 'true'
   })
+
+  // Theme State: defaults to light mode
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('studydash_theme') || 'light'
+  })
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    localStorage.setItem('studydash_theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
+  }
 
   // 2. Navigation State
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -57,11 +75,6 @@ function App() {
     const saved = localStorage.getItem('studydash_level')
     return saved ? parseInt(saved) : 1
   })
-
-  // Force system-wide deep dark mode class on document load
-  useEffect(() => {
-    document.documentElement.classList.add('dark')
-  }, [])
 
   // Sync persistent states to local storage
   useEffect(() => {
@@ -174,10 +187,16 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4 md:p-6 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-4 md:p-6 transition-colors duration-300 relative selection:bg-indigo-500 selection:text-white">
       
+      {/* Ambient background gradients for rich premium feel */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-indigo-200/50 dark:bg-indigo-900/15 rounded-full blur-3xl transition-colors duration-500" />
+        <div className="absolute top-1/2 -left-32 w-96 h-96 bg-violet-200/40 dark:bg-violet-900/15 rounded-full blur-3xl transition-colors duration-500" />
+      </div>
+
       {/* Outer Flex Container */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 relative z-10">
         
         {/* Responsive Floating Sidebar */}
         <Sidebar 
@@ -190,17 +209,17 @@ function App() {
         <main className="flex-1 space-y-6">
           
           {/* Header Row */}
-          <header className="glass rounded-3xl p-6 shadow-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-300">
+          <header className="glass rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-300">
             
             {/* Greetings / Profile Widget */}
             <div className="flex items-center space-x-4">
-              <div className="h-12 w-12 rounded-2xl bg-indigo-950 text-indigo-400 flex items-center justify-center font-bold text-xl shadow-inner">
+              <div className="h-12 w-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/50 flex items-center justify-center font-bold text-xl shadow-xs">
                 <GraduationCap className="h-6 w-6" />
               </div>
 
               <div>
                 <div className="flex items-center space-x-2">
-                  <h1 className="text-xl md:text-2xl font-bold tracking-tight text-slate-100">
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
                     Welcome Back, 
                   </h1>
                   
@@ -211,19 +230,19 @@ function App() {
                         value={tempUsername}
                         onChange={(e) => setTempUsername(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSaveUsername()}
-                        className="px-2 py-0.5 border border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded-lg text-sm bg-slate-900 font-semibold"
+                        className="px-2 py-0.5 border border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-lg text-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold"
                         autoFocus
                       />
                       <button 
                         onClick={handleSaveUsername}
-                        className="p-1 rounded bg-indigo-600 text-white"
+                        className="p-1 rounded bg-indigo-600 text-white cursor-pointer"
                       >
                         <Check className="h-3 w-3" />
                       </button>
                     </div>
                   ) : (
                     <div className="flex items-center space-x-1.5 group">
-                      <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                      <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">
                         {username}
                       </span>
                       <button
@@ -231,7 +250,7 @@ function App() {
                           setTempUsername(username)
                           setIsEditingUsername(true)
                         }}
-                        className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-indigo-400 p-1 rounded-lg transition-all"
+                        className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 p-1 rounded-lg transition-all cursor-pointer"
                       >
                         <Edit2 className="h-3.5 w-3.5" />
                       </button>
@@ -250,16 +269,16 @@ function App() {
             </div>
 
             {/* Level & XP Widget */}
-            <div className="flex items-center space-x-3 bg-slate-900/50 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800 px-4 py-2.5 rounded-2xl">
+            <div className="flex items-center space-x-3 bg-white/80 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 px-4 py-2.5 rounded-2xl shadow-xs">
               <div className="bg-amber-500/10 text-amber-500 p-2 rounded-xl animate-pulse">
                 <Trophy className="h-5 w-5" />
               </div>
               <div className="min-w-[120px] sm:min-w-[140px]">
-                <div className="flex items-center justify-between text-[11px] font-black text-slate-350 dark:text-slate-300 mb-1">
+                <div className="flex items-center justify-between text-[11px] font-black text-slate-600 dark:text-slate-300 mb-1">
                   <span>LVL {level}</span>
-                  <span className="text-indigo-400 font-extrabold">{xp} / {level * 100} XP</span>
+                  <span className="text-indigo-600 dark:text-indigo-400 font-extrabold">{xp} / {level * 100} XP</span>
                 </div>
-                <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200/50 dark:border-none">
                   <div 
                     className="h-full bg-gradient-to-r from-amber-400 via-indigo-500 to-violet-500 transition-all duration-500"
                     style={{ width: `${(xp / (level * 100)) * 100}%` }}
@@ -269,12 +288,24 @@ function App() {
             </div>
 
             {/* Config controls */}
-            <div className="flex items-center space-x-3 self-end sm:self-auto">
+            <div className="flex items-center space-x-2.5 self-end sm:self-auto">
+              <button
+                onClick={toggleTheme}
+                title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                className="p-2.5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all active:scale-95 shadow-xs flex items-center justify-center cursor-pointer"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-4.5 w-4.5 text-amber-400" />
+                ) : (
+                  <Moon className="h-4.5 w-4.5 text-indigo-600" />
+                )}
+              </button>
+
               <button
                 onClick={handleLogout}
-                className="bg-rose-600 hover:bg-rose-500 text-white px-5 py-3 rounded-2xl text-xs font-bold active:scale-95 shadow-lg shadow-rose-600/10 flex items-center space-x-2 transition-all"
+                className="bg-rose-50 hover:bg-rose-100 dark:bg-rose-600 dark:hover:bg-rose-500 text-rose-600 dark:text-white border border-rose-200 dark:border-transparent px-4 py-2.5 rounded-2xl text-xs font-bold active:scale-95 shadow-xs flex items-center space-x-2 transition-all cursor-pointer"
               >
-                <LogOut className="h-4.5 w-4.5" />
+                <LogOut className="h-4 w-4" />
                 <span>Logout</span>
               </button>
             </div>

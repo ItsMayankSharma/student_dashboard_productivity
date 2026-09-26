@@ -610,11 +610,11 @@ export default function Dashboard({
 
   // Sticky note configs
   const noteStyles = {
-    yellow: 'bg-amber-100 border-amber-300 dark:bg-amber-950/20 dark:border-amber-800 text-amber-900 dark:text-amber-250',
-    blue: 'bg-blue-100 border-blue-300 dark:bg-blue-950/20 dark:border-blue-800 text-blue-900 dark:text-blue-250',
-    pink: 'bg-pink-100 border-pink-300 dark:bg-pink-950/20 dark:border-pink-800 text-pink-900 dark:text-pink-250',
-    green: 'bg-emerald-100 border-emerald-300 dark:bg-emerald-950/20 dark:border-emerald-800 text-emerald-900 dark:text-emerald-250',
-    purple: 'bg-purple-100 border-purple-300 dark:bg-purple-950/20 dark:border-purple-800 text-purple-900 dark:text-purple-250'
+    yellow: 'bg-amber-50/90 border-amber-200 dark:bg-amber-950/20 dark:border-amber-800 text-amber-950 dark:text-amber-200 placeholder:text-amber-700/40',
+    blue: 'bg-sky-50/90 border-sky-200 dark:bg-blue-950/20 dark:border-blue-800 text-sky-950 dark:text-blue-200 placeholder:text-sky-700/40',
+    pink: 'bg-pink-50/90 border-pink-200 dark:bg-pink-950/20 dark:border-pink-800 text-pink-950 dark:text-pink-200 placeholder:text-pink-700/40',
+    green: 'bg-emerald-50/90 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800 text-emerald-950 dark:text-emerald-200 placeholder:text-emerald-700/40',
+    purple: 'bg-purple-50/90 border-purple-200 dark:bg-purple-950/20 dark:border-purple-800 text-purple-950 dark:text-purple-200 placeholder:text-purple-700/40'
   }
 
   const totalCompletedTasks = tasks.filter(t => t.completed).length
@@ -626,9 +626,9 @@ export default function Dashboard({
         <>
           {/* Dashboard Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-lg shadow-slate-100 dark:shadow-none hover:scale-[1.02] transition-all duration-300">
+            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-xs dark:shadow-none hover:shadow-md hover:scale-[1.01] transition-all duration-300">
               <div>
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-455 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                   Tasks Completed
                 </span>
                 <h3 className="text-3xl font-extrabold mt-1 text-indigo-600 dark:text-indigo-400">
@@ -640,9 +640,9 @@ export default function Dashboard({
               </div>
             </div>
 
-            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-lg shadow-slate-100 dark:shadow-none hover:scale-[1.02] transition-all duration-300">
+            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-xs dark:shadow-none hover:shadow-md hover:scale-[1.01] transition-all duration-300">
               <div>
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-455 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                   Study Hours
                 </span>
                 <h3 className="text-3xl font-extrabold mt-1 text-violet-600 dark:text-violet-400">
@@ -654,9 +654,9 @@ export default function Dashboard({
               </div>
             </div>
 
-            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-lg shadow-slate-100 dark:shadow-none hover:scale-[1.02] transition-all duration-300">
+            <div className="glass rounded-3xl p-6 flex items-center justify-between shadow-xs dark:shadow-none hover:shadow-md hover:scale-[1.01] transition-all duration-300">
               <div>
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-455 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                   Focus Score
                 </span>
                 <h3 className="text-3xl font-extrabold mt-1 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
@@ -676,25 +676,25 @@ export default function Dashboard({
             {/* LEFT COLUMN: TIMER & WEATHER */}
             <div className="lg:col-span-1 space-y-6">
               {/* Pomodoro Timer Mini-Widget */}
-              <div className="glass rounded-3xl p-6 shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
+              <div className="glass rounded-3xl p-6 shadow-sm dark:shadow-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
                 
                 {/* Clean Horizontal Header Layout with Perfectly Aligned Icon Trays */}
-                <div className="w-full flex items-center justify-between mb-6 pb-2 border-b border-white/5">
+                <div className="w-full flex items-center justify-between mb-6 pb-2 border-b border-slate-200/70 dark:border-white/5">
                   <div className="flex items-center space-x-1.5">
-                    <Clock className="h-4.5 w-4.5 text-indigo-400" />
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Focus Mode</span>
+                    <Clock className="h-4.5 w-4.5 text-indigo-500" />
+                    <span className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Focus Mode</span>
                   </div>
 
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => setSoundEnabled(!soundEnabled)}
                       title="Toggle Audio Feedback"
-                      className="flex items-center justify-center p-1.5 rounded-lg border border-white/5 hover:bg-slate-800/50 text-slate-400 hover:text-slate-355 transition-all active:scale-90"
+                      className="flex items-center justify-center p-1.5 rounded-lg border border-slate-200 dark:border-white/5 bg-slate-50 hover:bg-slate-100 dark:bg-transparent dark:hover:bg-slate-800/50 text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all active:scale-90 cursor-pointer"
                     >
                       {soundEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4 text-rose-500" />}
                     </button>
 
-                    <span className="text-xxs font-extrabold bg-indigo-950/80 text-indigo-400 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    <span className="text-xxs font-extrabold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-transparent px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                       {timerMode}
                     </span>
                   </div>
@@ -704,18 +704,18 @@ export default function Dashboard({
                 <div className="relative flex flex-col items-center justify-center w-full gap-5">
 
                   {/* Large SVG Ring */}
-                  <div className={`relative w-56 h-56 flex items-center justify-center select-none transition-all duration-500 ${timerRunning ? 'drop-shadow-[0_0_32px_rgba(99,102,241,0.35)]' : ''}`}>
+                  <div className={`relative w-56 h-56 flex items-center justify-center select-none transition-all duration-500 ${timerRunning ? 'drop-shadow-[0_0_24px_rgba(99,102,241,0.25)]' : ''}`}>
 
                     {/* Outer glow ring (decorative) */}
-                    <div className={`absolute inset-0 rounded-full transition-all duration-1000 ${timerRunning ? 'ring-4 ring-indigo-500/10 ring-offset-2 ring-offset-slate-950' : 'ring-2 ring-indigo-500/5'}`} />
+                    <div className={`absolute inset-0 rounded-full transition-all duration-1000 ${timerRunning ? 'ring-4 ring-indigo-500/15 ring-offset-2 ring-offset-slate-100 dark:ring-offset-slate-950' : 'ring-2 ring-indigo-500/5'}`} />
 
                     {/* SVG Progress Ring */}
                     <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 224 224">
                       <defs>
                         <linearGradient id="timerGradientMini" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#818cf8" />
-                          <stop offset="50%" stopColor="#6366f1" />
-                          <stop offset="100%" stopColor="#a78bfa" />
+                          <stop offset="50%" stopColor="#4f46e5" />
+                          <stop offset="100%" stopColor="#9333ea" />
                         </linearGradient>
                         <filter id="glowMini">
                           <feGaussianBlur stdDeviation="3" result="blur" />
@@ -723,9 +723,9 @@ export default function Dashboard({
                         </filter>
                       </defs>
                       {/* Track */}
-                      <circle cx="112" cy="112" r="100" fill="none" stroke="rgba(99,102,241,0.06)" strokeWidth="10" />
+                      <circle cx="112" cy="112" r="100" fill="none" stroke="rgba(99,102,241,0.1)" strokeWidth="10" />
                       {/* Secondary decorative track */}
-                      <circle cx="112" cy="112" r="88" fill="none" stroke="rgba(139,92,246,0.04)" strokeWidth="2" />
+                      <circle cx="112" cy="112" r="88" fill="none" stroke="rgba(139,92,246,0.06)" strokeWidth="2" />
                       {/* Progress arc */}
                       <circle
                         cx="112" cy="112" r="100"
@@ -740,14 +740,14 @@ export default function Dashboard({
                       />
                     </svg>
 
-                    {/* Inner dark circle background */}
-                    <div className="absolute inset-4 rounded-full bg-slate-950/90 border border-indigo-500/10" />
+                    {/* Inner circle background */}
+                    <div className="absolute inset-4 rounded-full bg-slate-50 dark:bg-slate-950/90 border border-slate-200/60 dark:border-indigo-500/10 shadow-inner" />
 
                     {/* Center content */}
                     <div className="relative z-10 flex flex-col items-center justify-center gap-1">
 
                       {/* Time display */}
-                      <span className="text-3xl font-black tracking-tight tabular-nums bg-gradient-to-b from-white to-slate-300 bg-clip-text text-transparent leading-none">
+                      <span className="text-3xl font-black tracking-tight tabular-nums text-slate-850 dark:bg-gradient-to-b dark:from-white dark:to-slate-300 dark:bg-clip-text dark:text-transparent leading-none">
                         {formatTime(timeLeft)}
                       </span>
 
@@ -756,19 +756,19 @@ export default function Dashboard({
                         <button
                           onClick={(e) => { e.stopPropagation(); adjustHours(-1); }}
                           disabled={timerRunning}
-                          className={`w-5 h-5 rounded-full bg-slate-800 border border-white/10 text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-[10px] font-black leading-none ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
+                          className={`w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-[10px] font-black leading-none ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
                         >−</button>
-                        <span className="text-[10px] font-extrabold text-indigo-400 tabular-nums min-w-[24px] text-center">
+                        <span className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400 tabular-nums min-w-[24px] text-center">
                           {Math.floor(timeLeft / 3600)}h
                         </span>
                         <button
                           onClick={(e) => { e.stopPropagation(); adjustHours(1); }}
                           disabled={timerRunning}
-                          className={`w-5 h-5 rounded-full bg-slate-800 border border-white/10 text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-[10px] font-black leading-none ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
+                          className={`w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-[10px] font-black leading-none ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
                         >+</button>
                       </div>
 
-                      <span className="text-[8px] text-slate-600 font-bold uppercase tracking-widest">
+                      <span className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">
                         {timerRunning ? '● Focusing' : 'click ± to adjust'}
                       </span>
                     </div>
@@ -781,18 +781,18 @@ export default function Dashboard({
                         key={d}
                         onClick={() => adjustMinutes(d)}
                         disabled={timerRunning}
-                        className={`flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/5 text-rose-400 hover:bg-rose-950/40 hover:border-rose-500/30 hover:text-rose-300 transition-all text-xs font-bold ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
+                        className={`flex items-center gap-1 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 dark:bg-slate-900 dark:border-white/5 dark:text-rose-400 dark:hover:bg-rose-950/40 dark:hover:border-rose-500/30 transition-all text-xs font-bold ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
                       >
                         {d}m
                       </button>
                     ))}
-                    <div className="h-5 w-px bg-white/10 mx-1" />
+                    <div className="h-5 w-px bg-slate-200 dark:bg-white/10 mx-1" />
                     {[1, 5].map(d => (
                       <button
                         key={d}
                         onClick={() => adjustMinutes(d)}
                         disabled={timerRunning}
-                        className={`flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-white/5 text-emerald-400 hover:bg-emerald-950/40 hover:border-emerald-500/30 hover:text-emerald-300 transition-all text-xs font-bold ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
+                        className={`flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-600 dark:bg-slate-900 dark:border-white/5 dark:text-emerald-400 dark:hover:bg-emerald-950/40 dark:hover:border-emerald-500/30 transition-all text-xs font-bold ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
                       >
                         +{d}m
                       </button>
@@ -804,7 +804,7 @@ export default function Dashboard({
                 <div className="flex items-center space-x-3 mt-4">
                   <button
                     onClick={startPauseTimer}
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-2xl font-bold shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/30 active:scale-95 flex items-center space-x-2 transition-all text-sm cursor-pointer"
+                    className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-2xl font-bold shadow-md shadow-indigo-600/25 active:scale-95 flex items-center space-x-2 transition-all text-sm cursor-pointer"
                   >
                     {timerRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 fill-current" />}
                     <span>{timerRunning ? 'Pause' : 'Start'}</span>
@@ -812,7 +812,7 @@ export default function Dashboard({
 
                   <button
                     onClick={() => resetTimer(timerMode, true)}
-                    className="bg-slate-800 hover:bg-slate-700 border border-white/5 text-slate-400 hover:text-white p-2.5 rounded-2xl active:scale-95 transition-all cursor-pointer"
+                    className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-white/5 dark:text-slate-400 dark:hover:text-white p-2.5 rounded-2xl active:scale-95 transition-all cursor-pointer"
                   >
                     <RotateCcw className="h-4 w-4" />
                   </button>
@@ -1424,23 +1424,23 @@ export default function Dashboard({
                 </svg>
 
                 {/* Inner background */}
-                <div className="absolute inset-[18px] rounded-full bg-slate-950/95 border border-indigo-500/10" />
-                <div className="absolute inset-[22px] rounded-full bg-gradient-to-b from-slate-900/30 to-transparent" />
+                <div className="absolute inset-[18px] rounded-full bg-slate-50 dark:bg-slate-950/95 border border-slate-200/60 dark:border-indigo-500/10 shadow-inner" />
+                <div className="absolute inset-[22px] rounded-full bg-gradient-to-b from-indigo-50/50 to-transparent dark:from-slate-900/30 dark:to-transparent" />
 
                 {/* Center content */}
                 <div className="relative z-10 flex flex-col items-center justify-center gap-3">
 
                   {/* Mode badge */}
                   <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-0.5 rounded-full border ${
-                    timerMode === 'work' ? 'text-indigo-300 border-indigo-500/30 bg-indigo-950/50' :
-                    timerMode === 'short' ? 'text-emerald-300 border-emerald-500/30 bg-emerald-950/50' :
-                    'text-violet-300 border-violet-500/30 bg-violet-950/50'
+                    timerMode === 'work' ? 'text-indigo-600 border-indigo-200 bg-indigo-50 dark:text-indigo-300 dark:border-indigo-500/30 dark:bg-indigo-950/50' :
+                    timerMode === 'short' ? 'text-emerald-600 border-emerald-200 bg-emerald-50 dark:text-emerald-300 dark:border-emerald-500/30 dark:bg-emerald-950/50' :
+                    'text-violet-600 border-violet-200 bg-violet-50 dark:text-violet-300 dark:border-violet-500/30 dark:bg-violet-950/50'
                   }`}>
                     {timerMode === 'work' ? '● Study Block' : timerMode === 'short' ? '● Short Break' : '● Long Break'}
                   </span>
 
                   {/* Main time display */}
-                  <span className="text-6xl md:text-7xl font-black tracking-tight tabular-nums bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent leading-none">
+                  <span className="text-6xl md:text-7xl font-black tracking-tight tabular-nums text-slate-900 dark:bg-gradient-to-b dark:from-white dark:via-slate-100 dark:to-slate-400 dark:bg-clip-text dark:text-transparent leading-none">
                     {formatTime(timeLeft)}
                   </span>
 
@@ -1449,22 +1449,22 @@ export default function Dashboard({
                     <button
                       onClick={(e) => { e.stopPropagation(); adjustHours(-1); }}
                       disabled={timerRunning}
-                      className={`w-8 h-8 rounded-full bg-slate-800 border border-white/10 text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-base font-black shadow-md ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
+                      className={`w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-base font-black shadow-xs ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
                     >−</button>
                     <div className="flex flex-col items-center">
-                      <span className="text-2xl font-black text-indigo-400 tabular-nums leading-none">
+                      <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400 tabular-nums leading-none">
                         {Math.floor(timeLeft / 3600)}
                       </span>
-                      <span className="text-[9px] text-slate-600 font-bold uppercase tracking-widest">hours</span>
+                      <span className="text-[9px] text-slate-400 dark:text-slate-600 font-bold uppercase tracking-widest">hours</span>
                     </div>
                     <button
                       onClick={(e) => { e.stopPropagation(); adjustHours(1); }}
                       disabled={timerRunning}
-                      className={`w-8 h-8 rounded-full bg-slate-800 border border-white/10 text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-base font-black shadow-md ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
+                      className={`w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 transition-all flex items-center justify-center text-base font-black shadow-xs ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-90'}`}
                     >+</button>
                   </div>
 
-                  <span className="text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+                  <span className="text-[10px] text-slate-400 dark:text-slate-600 font-bold uppercase tracking-widest">
                     {timerRunning ? '⚡ Engine Running' : 'Adjust time above'}
                   </span>
                 </div>
@@ -1477,18 +1477,18 @@ export default function Dashboard({
                     key={d}
                     onClick={() => adjustMinutes(d)}
                     disabled={timerRunning}
-                    className={`px-4 py-2 rounded-2xl bg-slate-900 border border-white/5 text-rose-400 hover:bg-rose-950/50 hover:border-rose-500/30 hover:text-rose-300 transition-all text-sm font-bold shadow-sm ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
+                    className={`px-4 py-2 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 dark:bg-slate-900 dark:border-white/5 dark:text-rose-400 dark:hover:bg-rose-950/50 transition-all text-sm font-bold shadow-xs ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
                   >
                     {d}m
                   </button>
                 ))}
-                <div className="h-8 w-px bg-white/10" />
+                <div className="h-8 w-px bg-slate-200 dark:bg-white/10" />
                 {[1, 5, 15].map(d => (
                   <button
                     key={d}
                     onClick={() => adjustMinutes(d)}
                     disabled={timerRunning}
-                    className={`px-4 py-2 rounded-2xl bg-slate-900 border border-white/5 text-emerald-400 hover:bg-emerald-950/50 hover:border-emerald-500/30 hover:text-emerald-300 transition-all text-sm font-bold shadow-sm ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
+                    className={`px-4 py-2 rounded-2xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-600 dark:bg-slate-900 dark:border-white/5 dark:text-emerald-400 dark:hover:bg-emerald-950/50 transition-all text-sm font-bold shadow-xs ${timerRunning ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer active:scale-95'}`}
                   >
                     +{d}m
                   </button>
@@ -1498,63 +1498,63 @@ export default function Dashboard({
             </div>
 
             {/* Flexible Custom Duration Adjuster Configuration Panel */}
-            <div className="glass p-5 rounded-3xl border border-white/5 space-y-4 max-w-sm mx-auto text-left">
-              <h5 className="text-xs font-bold text-slate-455 uppercase tracking-wider block mb-2 text-center">
+            <div className="glass p-5 rounded-3xl border border-slate-200/80 dark:border-white/5 space-y-4 max-w-sm mx-auto text-left shadow-xs">
+              <h5 className="text-xs font-bold text-slate-600 dark:text-slate-455 uppercase tracking-wider block mb-2 text-center">
                 Configure Standard Session Blocks
               </h5>
               
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-355">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-355">
                   <span>💼 Work Interval:</span>
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => adjustCustomDurationSetting('work', -1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       -
                     </button>
-                    <span className="w-12 text-center text-indigo-400 font-extrabold">{customDurations.work} min</span>
+                    <span className="w-12 text-center text-indigo-600 dark:text-indigo-400 font-extrabold">{customDurations.work} min</span>
                     <button
                       onClick={() => adjustCustomDurationSetting('work', 1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       +
                     </button>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-355">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-355">
                   <span>☕ Short Rest:</span>
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => adjustCustomDurationSetting('short', -1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       -
                     </button>
-                    <span className="w-12 text-center text-indigo-400 font-extrabold">{customDurations.short} min</span>
+                    <span className="w-12 text-center text-indigo-600 dark:text-indigo-400 font-extrabold">{customDurations.short} min</span>
                     <button
                       onClick={() => adjustCustomDurationSetting('short', 1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       +
                     </button>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-355">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-355">
                   <span>💤 Long Recess:</span>
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => adjustCustomDurationSetting('long', -1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       -
                     </button>
-                    <span className="w-12 text-center text-indigo-400 font-extrabold">{customDurations.long} min</span>
+                    <span className="w-12 text-center text-indigo-600 dark:text-indigo-400 font-extrabold">{customDurations.long} min</span>
                     <button
                       onClick={() => adjustCustomDurationSetting('long', 1)}
-                      className="h-6 w-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer"
+                      className="h-6 w-6 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-black active:scale-90 transition-all cursor-pointer border border-slate-200 dark:border-transparent"
                     >
                       +
                     </button>
@@ -1564,9 +1564,9 @@ export default function Dashboard({
             </div>
 
             {/* Soundscapes Ambient Mixer Panel */}
-            <div className="glass p-5 rounded-3xl border border-white/5 space-y-4 max-w-sm mx-auto text-left">
-              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2 text-center flex items-center justify-center gap-1.5">
-                <Music className="h-4 w-4 text-indigo-400" />
+            <div className="glass p-5 rounded-3xl border border-slate-200/80 dark:border-white/5 space-y-4 max-w-sm mx-auto text-left shadow-xs">
+              <h5 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider block mb-2 text-center flex items-center justify-center gap-1.5">
+                <Music className="h-4 w-4 text-indigo-500" />
                 <span>Ambient Focus Mixer</span>
               </h5>
               
@@ -1579,15 +1579,15 @@ export default function Dashboard({
                 ].map(track => {
                   const isActive = activeSoundTracks[track.id]
                   return (
-                    <div key={track.id} className="flex flex-col gap-1.5 p-2 rounded-xl bg-slate-900/50 border border-slate-950">
+                    <div key={track.id} className="flex flex-col gap-1.5 p-2.5 rounded-xl bg-slate-50/90 dark:bg-slate-900/50 border border-slate-200/80 dark:border-slate-950">
                       <div className="flex items-center justify-between text-[11px] font-bold">
-                        <span className="text-slate-350">{track.label}</span>
+                        <span className="text-slate-700 dark:text-slate-350">{track.label}</span>
                         <button
                           onClick={() => handleToggleSoundTrack(track.id)}
                           className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider border transition-all cursor-pointer ${
                             isActive 
-                              ? 'bg-indigo-650 text-white border-indigo-500 shadow-sm' 
-                              : 'bg-slate-800 hover:bg-slate-750 text-slate-405 border-white/5'
+                              ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' 
+                              : 'bg-slate-200 hover:bg-slate-300 text-slate-700 border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-405 dark:border-white/5'
                           }`}
                         >
                           {isActive ? 'ON' : 'OFF'}
@@ -1603,9 +1603,9 @@ export default function Dashboard({
                             step="0.05"
                             value={soundVolumes[track.id]}
                             onChange={(e) => handleVolumeChange(track.id, e.target.value)}
-                            className="flex-1 h-1 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                            className="flex-1 h-1 bg-slate-200 dark:bg-slate-850 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                           />
-                          <span className="text-[9px] text-indigo-455 font-extrabold min-w-[24px] text-right">
+                          <span className="text-[9px] text-indigo-600 dark:text-indigo-455 font-extrabold min-w-[24px] text-right">
                             {Math.round(soundVolumes[track.id] * 100)}%
                           </span>
                         </div>
@@ -1620,7 +1620,7 @@ export default function Dashboard({
             <div className="flex items-center justify-center space-x-4">
               <button
                 onClick={startPauseTimer}
-                className="bg-indigo-650 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-650/15 active:scale-95 flex items-center space-x-2 transition-all cursor-pointer"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-md shadow-indigo-600/20 active:scale-95 flex items-center space-x-2 transition-all cursor-pointer"
               >
                 {timerRunning ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 fill-current" />}
                 <span>{timerRunning ? 'Pause Engine' : 'Ignite Focus'}</span>
@@ -1628,7 +1628,7 @@ export default function Dashboard({
 
               <button
                 onClick={() => resetTimer(timerMode, true)}
-                className="bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-255 dark:border-slate-700 text-slate-655 dark:text-slate-350 p-4 rounded-2xl active:scale-95 transition-all shadow-sm cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-350 p-4 rounded-2xl active:scale-95 transition-all shadow-xs cursor-pointer"
               >
                 <RotateCcw className="h-5 w-5" />
               </button>
